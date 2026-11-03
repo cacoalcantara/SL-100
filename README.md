@@ -6,12 +6,12 @@ Projeto aberto para documentar o protocolo local da caixa de som **BX100 / SL100
 
 ## O que existe
 - `docs/PROTOCOL.md` — protocolo local (descoberta UDP, TCP 41200, quadro FF56, cifra, mensagens), derivado do app Android v1.2.3.
-- `client/` — cliente de referência em Node.js (reimplementação própria). `node client/selftest.mjs` valida codec e quadro offline.
+- `client/` — cliente de referência em Node.js (reimplementação própria): TCP em `bx100.mjs`, Bluetooth em `ble.mjs`. Testes offline: `node client/selftest.mjs` e `node client/selftest-ble.mjs`.
 - `evidence/` — como reproduzir cada afirmação com o REA.
 
 ## O que ainda falta (ajude aqui)
 - Validar com um BX100/SL100 real (descoberta, GetDevInfo, ConnectWIFI).
-- Decifrar o pareamento por Bluetooth (UUIDs em PROTOCOL.md) e por som.
+- Validar o Bluetooth em hardware (codec já escrito) e decifrar o pareamento por som.
 - Descobrir se o aparelho aceita o `authCode` localmente ou só o repassa à nuvem.
 - Analisar o firmware; propor um servidor substituto para as funções que dependiam da nuvem (login, luz, IA).
 
@@ -22,4 +22,4 @@ Este repositório **não** contém chaves, credenciais nem contas da Sabala (cha
 O repositório contém apenas especificação e código escrito do zero. Não inclua o APK, código decompilado ou recursos do app da Sabala. Interoperabilidade com aparelho que você possui; sem afiliação com a Sabala/PicoShadow.
 
 ## Licença
-A definir (ver issue de licença).
+MIT — ver o arquivo `LICENSE`.
