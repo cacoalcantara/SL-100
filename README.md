@@ -6,6 +6,7 @@ Projeto aberto para documentar o protocolo local da caixa de som **BX100 / SL100
 
 ## O que existe
 - `docs/PROTOCOL.md` — protocolo local (descoberta UDP, TCP 41200, quadro FF56, cifra, mensagens), derivado do app Android v1.2.3.
+- `docs/PROVISIONING.md` — fluxo de configuração, dependência da nuvem e perguntas em aberto.
 - `client/` — cliente de referência em Node.js (reimplementação própria): TCP em `bx100.mjs`, Bluetooth em `ble.mjs`. Testes offline: `node client/selftest.mjs` e `node client/selftest-ble.mjs`.
 - `evidence/` — como reproduzir cada afirmação com o REA.
 
