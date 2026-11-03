@@ -1,8 +1,10 @@
-// RECONSTRUÇÃO a partir de engenharia reversa estática do APK com.picoshadow.bx100 v1.2.3 (classe util/i.java, "SpeakerManager").
-// Não validado contra hardware. Não é o código original.
-export const SERVICE_UUID = '0000f012-0000-1000-8000-00805f9b34fb';
-export const NOTIFY_UUID  = 'f5e0e265-7a63-4303-9850-abd73728fba2';
-export const WRITE_UUID   = '689aab00-df3d-4aac-b19b-2dfd4a97197b';
+// RECONSTRUÇÃO a partir de engenharia reversa estática do APK com.picoshadow.bx100 v1.2.3
+// (classes util/i.java "SpeakerManager" + activity/BleConditionActivity.java, linhas 102-106).
+// GATT (serviço/característica) confirmado uma vez em hardware real (SL100); round-trip completo ainda não. Ver docs/PROTOCOL.md.
+export const DEVICE_NAMES = ['SL100-BLE', 'SL200-BLE'];
+export const SERVICE_UUID = '00001112-0000-1000-8000-00805f9b34fb';
+export const NOTIFY_UUID  = '00003334-0000-1000-8000-00805f9b34fb';
+export const WRITE_UUID   = '00003334-0000-1000-8000-00805f9b34fb'; // mesma característica da notificação
 export const TYPE = { GET_INFO: 1, AUTH_CODE: 2, WIFI: 3, TIMEZONE: 4 };
 export const CHUNK = 15, CHUNK_DELAY_MS = 320, SEP = 0xfd;
 
