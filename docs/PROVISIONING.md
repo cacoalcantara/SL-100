@@ -13,7 +13,22 @@ Derivado do app Android v1.2.3 (hash em `evidence/APK_SHA256.txt`). **Nada aqui 
 
 O mesmo conjunto existe por Bluetooth LE (ver `PROTOCOL.md`): tipos 1 (info), 2 (`authCode`), 3 (Wi-Fi) e 4 (fuso).
 
-O app também contém uma biblioteca nativa de pareamento por som (`libSoundAutentication_jni`). Ela está desmontada, mas **não foi interpretada**; o formato do sinal sonoro é desconhecido.
+## Pareamento por som (SETUP_TYPE_AI_SOUND_WAVE)
+
+Confirmado por engenharia reversa (2026-11-03). A biblioteca nativa `libSoundAutentication_jni` (classe `com.aw.SoundAuthentication`) é um **modem acústico**: o celular converte uma string em áudio PCM (`nativeEncodeStrToPcm`) e toca pelo alto-falante; o microfone da caixa captura e decodifica. Usa tom de sincronismo e correção de erros Reed-Solomon.
+
+String codificada (de `SWWaitActivity.java`), campos separados por `:::`:
+
+```
+ssid ::: senha ::: timezone_id ::: offset_utc_segundos ::: device_auth_code
+```
+
+- `offset_utc_segundos` = `(ZONE_OFFSET + DST_OFFSET) / 1000`
+- `device_auth_code` = o **mesmo** authCode que vinha da nuvem (`GetAuthCode`)
+
+Parâmetros do encoder: `max_str_len=128, sample_rate=16000 Hz, freq_type=0, error_correct=1, error_correct_num=4, group_symbol_num=10`. Áudio: mono, PCM 16-bit, 16000 Hz.
+
+**Consequência:** o pareamento por som depende do mesmo `device_auth_code` da nuvem desativada. A modulação exata (string → PCM) está na `.so`; o pseudocódigo C já foi extraído (Ghidra), mas a reimplementação ainda não foi feita.
 
 ## O que dependia da nuvem
 
